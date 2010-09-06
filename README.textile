@@ -1,6 +1,6 @@
 h1. rxtk
 
-h5. php regular expression test tool
+h5. php regular expression toolkit
 
 Rxtk is a simple interactive tool to assist in the writing of regular expressions in PHP.
 
