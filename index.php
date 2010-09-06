@@ -21,6 +21,9 @@
 				rxtk
 			</h1>
 			
+			<br />
+			<a href='<?php echo basename($_SERVER['SCRIPT_NAME']); ?>?demo'>Demo</a>
+			
 			<?php
 			
 				if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -47,6 +50,19 @@
 					if ($blnModU2) { $strModifiers .= 'u'; }
 					
 					$strResult = preg_replace($strDelimiter.$strRegex.$strDelimiter.$strModifiers, "<span class='match'>$0</span>", $strSampleText);
+				}
+				else {
+					// default options
+					$blnModI = true;
+					$blnModM = true;
+					$blnModS = true;
+					
+					if (isset($_GET['demo'])) {
+						$strSampleText = "Enter your sample text here.\nThis is the text to which the regex will be applied.\nEnter your regex below.\nIf your regex text contains the delimiter character, you may wish to change the delimiter.\nHit the button, and see the results!";
+						$strRegex = "(^|\W)text(\W|$)";
+						$strDelimiter = "/";						
+						$strResult = preg_replace($strDelimiter.$strRegex.$strDelimiter.'ims', "<span class='match'>$0</span>", $strSampleText);
+					}
 				}
 			
 			?>
