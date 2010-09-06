@@ -1,0 +1,13 @@
+h1. rxtk
+
+h5. php regular expression test tool
+
+Rxtk is a simple interactive tool to assist in the writing of regular expressions in PHP.
+
+Inspired by the "RX Toolbox" component of the (somewhat expensive) Komodo IDE, Rxtk allows you to edit regular expressions on-the-fly and see the results applied to test text of your choice.
+
+I personally find regex work to be a bit of a brainache at times, so I thought I'd knock up a quick tool to ease some of the pain. Hope you find it useful!
+
+"BigglesZX":http://github.com/BigglesZX/
+
+"rxtk":http://github.com/BigglesZX/rxtk on GitHub
