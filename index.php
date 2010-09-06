@@ -26,6 +26,7 @@
 				if ($_SERVER['REQUEST_METHOD'] == "POST") {
 					$strSampleText = stripslashes($_POST['sample-text']);
 					$strRegex = stripslashes($_POST['regex']);
+					$strDelimiter = stripslashes($_POST['delimiter']);
 					$blnModI = isset($_POST['mod-i']);
 					$blnModM = isset($_POST['mod-m']);
 					$blnModS = isset($_POST['mod-s']);
@@ -45,7 +46,7 @@
 					if ($blnModU) { $strModifiers .= 'U'; }
 					if ($blnModU2) { $strModifiers .= 'u'; }
 					
-					$strResult = preg_replace('/'.$strRegex.'/'.$strModifiers, "<span class='match'>$0</span>", $strSampleText);
+					$strResult = preg_replace($strDelimiter.$strRegex.$strDelimiter.$strModifiers, "<span class='match'>$0</span>", $strSampleText);
 				}
 			
 			?>
@@ -64,6 +65,8 @@
 							<a href='http://www.php.net/manual/en/book.pcre.php'>PCRE Regular Expression</a>
 						</h3>
 						<textarea name='regex' rows='3' class='textbox'><?php if (isset($strRegex)) { echo $strRegex; } ?></textarea>
+						<h3 class='inline'><a href='http://www.php.net/manual/en/regexp.reference.delimiters.php'>Delimiter</a>:</h3>&nbsp;
+						<input type='text' name='delimiter' class='textbox' size='1' maxlength='1' value='<?php if (isset($strDelimiter)) { echo $strDelimiter; } else { echo '/'; } ?>' />
 						<input type='submit' name='submit' value=' Test ' class='button' />
 					</div>
 					

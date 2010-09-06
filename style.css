@@ -186,6 +186,15 @@ a:hover {
 	width: 96.5%;
 }
 
+#regex-input h3.inline {
+	display: inline;
+}
+
+#regex-input input.textbox {
+	display: inline;
+	text-align: center;
+}
+
 #regex-input input.button {
 	float: right;
 }
