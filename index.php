@@ -1,3 +1,7 @@
+<?php
+	error_reporting(E_ALL);
+	header('Content-Type: text/html; charset=utf-8');
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -17,20 +21,49 @@
 				rxtk
 			</h1>
 			
+			<?php
+			
+				if ($_SERVER['REQUEST_METHOD'] == "POST") {
+					$strSampleText = stripslashes($_POST['sample-text']);
+					$strRegex = stripslashes($_POST['regex']);
+					$blnModI = isset($_POST['mod-i']);
+					$blnModM = isset($_POST['mod-m']);
+					$blnModS = isset($_POST['mod-s']);
+					$blnModX = isset($_POST['mod-x']);
+					$blnModA = isset($_POST['mod-a']);
+					$blnModD = isset($_POST['mod-d']);
+					$blnModU = isset($_POST['mod-u']);
+					$blnModU2 = isset($_POST['mod-u2']);
+					
+					$strModifiers = '';
+					if ($blnModI) { $strModifiers .= 'i'; }
+					if ($blnModM) { $strModifiers .= 'm'; }
+					if ($blnModS) { $strModifiers .= 's'; }
+					if ($blnModX) { $strModifiers .= 's'; }
+					if ($blnModA) { $strModifiers .= 'A'; }
+					if ($blnModD) { $strModifiers .= 'D'; }
+					if ($blnModU) { $strModifiers .= 'U'; }
+					if ($blnModU2) { $strModifiers .= 'u'; }
+					
+					$strResult = preg_replace('/'.$strRegex.'/'.$strModifiers, "<span class='match'>$0</span>", $strSampleText);
+				}
+			
+			?>
+			
 			<div id='input-container'>
 				<form action='<?php echo basename($_SERVER['SCRIPT_NAME']); ?>' method='post'>
 					<div id='sample-input' class='input-section'>
 						<h3>
 							Sample Text
 						</h3>
-						<textarea name='sample-text' class='textbox' rows='10'></textarea>
+						<textarea name='sample-text' class='textbox' rows='10'><?php if (isset($strSampleText)) { echo $strSampleText; } ?></textarea>
 					</div>
 					
 					<div id='regex-input' class='input-section'>
 						<h3>
 							<a href='http://www.php.net/manual/en/book.pcre.php'>PCRE Regular Expression</a>
 						</h3>
-						<textarea name='regex' rows='3' class='textbox'></textarea>
+						<textarea name='regex' rows='3' class='textbox'><?php if (isset($strRegex)) { echo $strRegex; } ?></textarea>
 						<input type='submit' name='submit' value=' Test ' class='button' />
 					</div>
 					
@@ -40,37 +73,37 @@
 						</h3>
 						<div class='option-col'>
 							<label for='check-mod-i'>
-								<input type='checkbox' name='mod-i' id='check-mod-i' checked='checked' />
+								<input type='checkbox' name='mod-i' id='check-mod-i' <?php if (@$blnModI) { echo "checked='checked' "; } ?>/>
 								i (case-insensitive)
 							</label>
 							<label for='check-mod-m'>
-								<input type='checkbox' name='mod-m' id='check-mod-m' checked='checked' />
+								<input type='checkbox' name='mod-m' id='check-mod-m' <?php if (@$blnModM) { echo "checked='checked' "; } ?>/>
 								m (multiline)
 							</label>
 							<label for='check-mod-s'>
-								<input type='checkbox' name='mod-s' id='check-mod-s' checked='checked' />
+								<input type='checkbox' name='mod-s' id='check-mod-s' <?php if (@$blnModS) { echo "checked='checked' "; } ?>/>
 								s (dot matches all)
 							</label>
 							<label for='check-mod-x'>
-								<input type='checkbox' name='mod-x' id='check-mod-x' />
+								<input type='checkbox' name='mod-x' id='check-mod-x' <?php if (@$blnModX) { echo "checked='checked' "; } ?>/>
 								x (extended mode)
 							</label>
 						</div>
 						<div class='option-col option-col-last'>
 							<label for='check-mod-a'>
-								<input type='checkbox' name='mod-a' id='check-mod-a' />
+								<input type='checkbox' name='mod-a' id='check-mod-a' <?php if (@$blnModA) { echo "checked='checked' "; } ?>/>
 								A (anchored)
 							</label>
 							<label for='check-mod-d'>
-								<input type='checkbox' name='mod-d' id='check-mod-d' />
+								<input type='checkbox' name='mod-d' id='check-mod-d' <?php if (@$blnModD) { echo "checked='checked' "; } ?>/>
 								D (dollar end-only)
 							</label>
 							<label for='check-mod-u'>
-								<input type='checkbox' name='mod-u' id='check-mod-u' />
+								<input type='checkbox' name='mod-u' id='check-mod-u' <?php if (@$blnModU) { echo "checked='checked' "; } ?>/>
 								U (ungreedy)
 							</label>
 							<label for='check-mod-u2'>
-								<input type='checkbox' name='mod-u2' id='check-mod-u2' />
+								<input type='checkbox' name='mod-u2' id='check-mod-u2' <?php if (@$blnModU2) { echo "checked='checked' "; } ?>/>
 								u (utf-8 mode)
 							</label>
 						</div>
@@ -83,9 +116,10 @@
 					Result Text
 				</h3>
 				<div id='result-output-inner'>
-					
+					<?php if (isset($strResult)) { echo nl2br($strResult); } ?>
 				</div>
 			</div>
+			<!--
 			<div id='error-output' class='output-section'>
 				<h3>
 					PHP Errors
@@ -94,6 +128,7 @@
 					
 				</div>
 			</div>
+			-->
 			
 			<div id='footer'>
 				<br /><br />
