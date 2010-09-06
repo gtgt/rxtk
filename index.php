@@ -18,12 +18,20 @@
 			</h1>
 			
 			<div id='input-container'>
-				<form action='<?php echo basename($_SERVER['SCRIPT_NAME']); ?>'>
+				<form action='<?php echo basename($_SERVER['SCRIPT_NAME']); ?>' method='post'>
+					<div id='sample-input' class='input-section'>
+						<h3>
+							Sample Text
+						</h3>
+						<textarea name='sample-text' class='textbox' rows='10'></textarea>
+					</div>
+					
 					<div id='regex-input' class='input-section'>
 						<h3>
 							<a href='http://www.php.net/manual/en/book.pcre.php'>PCRE Regular Expression</a>
 						</h3>
 						<textarea name='regex' rows='3' class='textbox'></textarea>
+						<input type='submit' name='submit' value=' Test ' class='button' />
 					</div>
 					
 					<div id='options-input' class='input-section'>
@@ -67,15 +75,30 @@
 							</label>
 						</div>
 					</div>
-					
-					<div id='sample-input' class='input-section'>
-					</div>
 				</form>
 			</div>
 			
-			<div id='result-output'>
+			<div id='result-output' class='output-section'>
+				<h3>
+					Result Text
+				</h3>
+				<div id='result-output-inner'>
+					
+				</div>
 			</div>
-			<div id='error-output'>
+			<div id='error-output' class='output-section'>
+				<h3>
+					PHP Errors
+				</h3>
+				<div id='error-output-inner'>
+					
+				</div>
+			</div>
+			
+			<div id='footer'>
+				<br /><br />
+				<a href='http://github.com/BigglesZX/rxtk'>rxtk</a> by <a href='http://github.com/BigglesZX/'>BigglesZX</a> | <a href='http://github.com/BigglesZX/rxtk'>fork me</a> on <a href='http://github.com/'>github!</a>
+				<br /><br />
 			</div>
 		</div>
 		
