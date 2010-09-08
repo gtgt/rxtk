@@ -168,7 +168,7 @@ a:hover {
 	border: 1px #eee solid;
 	padding: 10px;
 	margin: 2px;
-	min-height: 110px;
+	min-height: 115px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
@@ -184,9 +184,10 @@ a:hover {
 
 #regex-input textarea {
 	width: 96.5%;
+	margin-top: 10px;
 }
 
-#regex-input h3.inline {
+h3.inline {
 	display: inline;
 }
 
@@ -224,7 +225,12 @@ a:hover {
 }
 
 #sample-input textarea {
+	margin-top: 5px;
 	width: 98%;
+}
+
+#sample-input label, #regex-input label {
+	margin-left: 10px;
 }
 
 .textbox, .button {
